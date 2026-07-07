@@ -40,8 +40,8 @@ export function parseISODate(value: string): Date {
       `Invalid ISO date "${value}": day ${day} must be at least 1`,
     );
   }
-  const date = new Date(value);
-  if (isNaN(date.getTime()) || date.getUTCMonth() + 1 !== month || date.getUTCDate() !== day) {
+  const date = new Date(year, month - 1, day);
+  if (isNaN(date.getTime()) || date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
     throw new Error(
       `Invalid ISO date "${value}": date does not exist in the calendar`,
     );
