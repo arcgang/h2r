@@ -19,7 +19,7 @@ export interface Employee {
 
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-export function parseISODate(value: string): Date {
+function parseISODate(value: string): Date {
   if (!ISO_DATE_RE.test(value)) {
     throw new Error(
       `Invalid ISO date "${value}": expected YYYY-MM-DD format`,
@@ -41,7 +41,12 @@ export function parseISODate(value: string): Date {
     );
   }
   const date = new Date(year, month - 1, day);
-  if (isNaN(date.getTime()) || date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+  if (
+    isNaN(date.getTime()) ||
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  ) {
     throw new Error(
       `Invalid ISO date "${value}": date does not exist in the calendar`,
     );
